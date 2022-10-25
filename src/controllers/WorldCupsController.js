@@ -1,11 +1,11 @@
-const Matches = require('../classes/Match');
+const WorldCups = require('../classes/WorldCups');
 
 module.exports = {
     post(req, res) {
         try{
-            const match = Matches.create(req.body);
+            const worldCup = WorldCups.create(req.body);
 
-            res.status(201).send('Partida criada!');
+            res.status(201).send('Copa do mundo criada!');
         }catch(e){
             res.status(500).send(e);
         }
@@ -23,8 +23,8 @@ module.exports = {
     },
 
     getAll(req, res){
-        const matches = Matches.findAll();
-        res.status(200).send(matches);
+        const worldCups = WorldCups.findAll();
+        res.status(200).send(worldCups);
     },
 
     getById (req, res){

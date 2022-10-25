@@ -1,5 +1,9 @@
-const MatchRoute = require('./MatchRoute');
+const MatchsRoute = require('./MatchsRoute');
+const TeamsRoute = require('./TeamsRoute');
+const WorldCupsRoute = require('./WorldCupsRoute');
 
 module.exports = (app) => {
-   MatchRoute(app)
+   MatchsRoute(app),
+   TeamsRoute(app),
+   WorldCupsRoute(app)
 }

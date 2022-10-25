@@ -5,7 +5,7 @@ const sequelize = new Sequelize('worldcup', 'root', undefined, {
     dialect: 'mysql'
 });
 
-const Match = sequelize.define('match', {
+const Teams = sequelize.define('teams', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey:true,
@@ -14,10 +14,13 @@ const Match = sequelize.define('match', {
   },
   title: {
     type: DataTypes.STRING
+  },
+  cups: {
+    type: DataTypes.INTEGER,
   }
 }, {
     createdAt:false,
     updatedAt:false
 });
 
-module.exports = Match
+module.exports = Teams
