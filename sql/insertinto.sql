@@ -1,0 +1,17 @@
+INSERT INTO teams(title,cups)
+VALUES ('França',0),
+('Argentina',0),
+('Uruguai',0),
+('Portugal',0),
+('Brasil',0),
+('México',0),
+('Bélgica',0),
+('Japão',0),
+('Espanha',0),
+('Russia',0),
+('Croácia',0),
+('Dinamarca',0),
+('Suécia',0),
+('Suiça',0),
+('Colômbia',0),
+('Inglaterra',0)

@@ -1,19 +1,24 @@
-const WorldCups = require('../classes/WorldCups');
+const WorldCupTeams = require('../classes/WorldcupTeams');
 
 module.exports = {
     async post(req, res) {
         try{
-            await WorldCups.create(req.body);
+            if(req.body && Array.isArray(req.body)){
+                await req.body.forEach(worldcupteam => {
+                    WorldCupTeams.create(worldcupteam);
+                });
+            }else
+                await WorldCupTeams.create(req.body);
 
-            res.status(201).send('Copa do mundo criada!');
+            res.status(201).send('Relação criada!');
         }catch(e){
-            res.status(500).send(e);
+            res.status(500).send(req.body);
         }
     },
     
     async put(req, res){
         try{
-            await WorldCups.update(req.body, {
+            await WorldCupTeams.update(req.body, {
                 where: {
                   id: req.params.id
                 }
@@ -27,7 +32,7 @@ module.exports = {
 
     async delete (req, res){
         try{
-            await WorldCups.destroy({
+            await WorldCupTeams.destroy({
                 where: {
                   id: req.params.id
                 }
@@ -41,8 +46,8 @@ module.exports = {
 
     async getAll(req, res){
         try{
-            const worldcups = await WorldCups.findAll();
-            res.status(200).json(worldcups);
+            const worldcupteams = await WorldCupTeams.findAll();
+            res.status(200).json(worldcupteams);
         }catch(e){
             res.status(500).send("Operação falhou!");
         }
@@ -50,8 +55,8 @@ module.exports = {
 
     async getById (req, res){
         try{
-            const worldcup = await WorldCups.findOne({ where: { id: req.params.id } });
-            res.status(200).send(worldcup);
+            const worldcupteam = await WorldCupTeams.findOne({ where: { id: req.params.id } });
+            res.status(200).send(worldcupteam);
         }catch(e){
             res.status(500).send("Operação falhou!");
         }

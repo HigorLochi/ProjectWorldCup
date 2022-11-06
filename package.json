@@ -2,9 +2,10 @@
   "name": "worldcup",
   "version": "1.0.0",
   "description": "API to simulate some features of a World up.",
-  "main": "index.js",
+  "main": "src/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "worldcupapi": "nodemon src/server.js"
   },
   "repository": {
     "type": "git",

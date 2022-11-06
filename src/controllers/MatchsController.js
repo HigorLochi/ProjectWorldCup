@@ -1,9 +1,9 @@
 const Matchs = require('../classes/Matchs');
 
 module.exports = {
-    post(req, res) {
+    async post(req, res) {
         try{
-            const match = Matchs.create(req.body);
+            await Matchs.create(req.body);
 
             res.status(201).send('Partida criada!');
         }catch(e){
@@ -11,24 +11,49 @@ module.exports = {
         }
     },
     
-    put(req, res){
-        let id = req.params.id;
-        
-        res.status(201).send(`Rota PUT com ID! --> ${id}`);
+    async put(req, res){
+        try{
+            await Matchs.update(req.body, {
+                where: {
+                  id: req.params.id
+                }
+            });
+
+            res.status(200).send("Sucesso!");
+        }catch(e){
+            res.status(500).send("Operação falhou!");
+        }
     },
 
-    delete (req, res){
-        let id = req.params.id;
-        res.status(200).send(`Rota DELETE com ID! --> ${id}`);
+    async delete (req, res){
+        try{
+            await Matchs.destroy({
+                where: {
+                  id: req.params.id
+                }
+            });
+
+            res.status(200).send("Sucesso!");
+        }catch(e){
+            res.status(500).send("Operação falhou!");
+        }
     },
 
-    getAll(req, res){
-        const matchs = Matchs.findAll();
-        res.status(200).send(matchs);
+    async getAll(req, res){
+        try{
+            const matchs = await Matchs.findAll();
+            res.status(200).json(matchs);
+        }catch(e){
+            res.status(500).send("Operação falhou!");
+        }
     },
 
-    getById (req, res){
-        let id = req.params.id;
-        res.status(200).send(`Rota GET com ID! ${id}`);
+    async getById (req, res){
+        try{
+            const match = await Matchs.findOne({ where: { id: req.params.id } });
+            res.status(200).send(match);
+        }catch(e){
+            res.status(500).send("Operação falhou!");
+        }
     }
 }

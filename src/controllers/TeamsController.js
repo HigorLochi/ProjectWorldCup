@@ -1,34 +1,64 @@
-const Teams = require('../classes/WorldCups');
+const Teams = require('../classes/Teams');
 
 module.exports = {
-    post(req, res) {
+    async post(req, res) {
         try{
-            const team = Teams.create(req.body);
+            if(req.body && Array.isArray(req.body)){
+                await req.body.forEach(team => {
+                    Teams.create(team);
+                });
+            }else
+                await Teams.create(req.body);
 
-            res.status(201).send('Partida criada!');
+            res.status(201).send('Time(s) criado(s)!');
         }catch(e){
-            res.status(500).send(e);
+            res.status(500).send(req.body);
         }
     },
     
-    put(req, res){
-        let id = req.params.id;
-        
-        res.status(201).send(`Rota PUT com ID! --> ${id}`);
+    async put(req, res){
+        try{
+            await Teams.update(req.body, {
+                where: {
+                  id: req.params.id
+                }
+            });
+
+            res.status(200).send("Sucesso!");
+        }catch(e){
+            res.status(500).send("Operação falhou!");
+        }
     },
 
-    delete (req, res){
-        let id = req.params.id;
-        res.status(200).send(`Rota DELETE com ID! --> ${id}`);
+    async delete (req, res){
+        try{
+            await Teams.destroy({
+                where: {
+                  id: req.params.id
+                }
+            });
+
+            res.status(200).send("Sucesso!");
+        }catch(e){
+            res.status(500).send("Operação falhou!");
+        }
     },
 
-    getAll(req, res){
-        const teams = Teams.findAll();
-        res.status(200).send(teams);
+    async getAll(req, res){
+        try{
+            const teams = await Teams.findAll();
+            res.status(200).json(teams);
+        }catch(e){
+            res.status(500).send("Operação falhou!");
+        }
     },
 
-    getById (req, res){
-        let id = req.params.id;
-        res.status(200).send(`Rota GET com ID! ${id}`);
+    async getById (req, res){
+        try{
+            const team = await Teams.findOne({ where: { id: req.params.id } });
+            res.status(200).send(team);
+        }catch(e){
+            res.status(500).send("Operação falhou!");
+        }
     }
 }
