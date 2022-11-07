@@ -1,4 +1,7 @@
 const WorldCupTeams = require('../classes/WorldcupTeams');
+const Teams = require('../classes/Teams');
+const WorldCups = require('../classes/WorldCups');
+const { BelongsTo } = require('sequelize');
 
 module.exports = {
     async post(req, res) {
@@ -46,7 +49,18 @@ module.exports = {
 
     async getAll(req, res){
         try{
-            const worldcupteams = await WorldCupTeams.findAll();
+            const worldcupteams = await WorldCupTeams.findAll({
+                include: [
+                    {
+                        model: Teams,
+                        association: new BelongsTo(WorldCupTeams, Teams, {foreignKey:"idTeam"}),
+                    },
+                    {
+                        model: WorldCups,
+                        association: new BelongsTo(WorldCupTeams, WorldCups, {foreignKey:"idWorldcup"}),
+                    }
+                ]
+            });
             res.status(200).json(worldcupteams);
         }catch(e){
             res.status(500).send("Operação falhou!");
@@ -55,7 +69,19 @@ module.exports = {
 
     async getById (req, res){
         try{
-            const worldcupteam = await WorldCupTeams.findOne({ where: { id: req.params.id } });
+            const worldcupteam = await WorldCupTeams.findOne({ 
+                where: { id: req.params.id },
+                include: [
+                    {
+                        model: Teams,
+                        association: new BelongsTo(WorldCupTeams, Teams, {foreignKey:"idTeam"}),
+                    },
+                    {
+                        model: WorldCups,
+                        association: new BelongsTo(WorldCupTeams, WorldCups, {foreignKey:"idWorldcup"}),
+                    }
+                ]
+            });
             res.status(200).send(worldcupteam);
         }catch(e){
             res.status(500).send("Operação falhou!");

@@ -6,14 +6,14 @@ const sequelize = new Sequelize('worldcup', 'root', undefined, {
     dialect: 'mysql'
 });
 
-const Matchs = sequelize.define('matchs', {
+const Matchs = sequelize.define('Matchs', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey:true,
     autoIncrement: true,
     allowNull: false
   },
-  idWorlCup: {
+  idWorldCup: {
     type: DataTypes.INTEGER
   },
   phase: {
@@ -33,11 +33,8 @@ const Matchs = sequelize.define('matchs', {
   }
 }, {
     createdAt:false,
-    updatedAt:false
+    updatedAt:false,
+    tableName:"matchs"
 });
-
-//Matchs.belongsTo(WorldCups, {foreignKey: 'idWorlCup'})
-//Matchs.belongsTo(Teams, {foreignKey: 'idTeam1'})
-//Matchs.belongsTo(Teams, {foreignKey: 'idTeam2'})
 
 module.exports = Matchs

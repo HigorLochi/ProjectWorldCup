@@ -1,12 +1,10 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const WorldCups = require('./WorldCups')
-const Teams = require('./Teams');
 const sequelize = new Sequelize('worldcup', 'root', undefined, {
     host: 'localhost',
     dialect: 'mysql'
 });
 
-const WorldcupTeams = sequelize.define('worldcupteams', {
+const WorldcupTeams = sequelize.define('WorldcupTeams', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey:true,
@@ -21,10 +19,8 @@ const WorldcupTeams = sequelize.define('worldcupteams', {
   }
 }, {
     createdAt:false,
-    updatedAt:false
+    updatedAt:false,
+    tableName:"worldcupteams"
 });
-
-WorldcupTeams.belongsTo(WorldCups, {foreignKey: 'idWorlCup'})
-WorldcupTeams.belongsTo(Teams, {foreignKey: 'idTeam'})
 
 module.exports = WorldcupTeams
