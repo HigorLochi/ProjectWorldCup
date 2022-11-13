@@ -6,9 +6,14 @@ const WorldCups = require('../classes/WorldCups');
 module.exports = {
     async post(req, res) {
         try{
-            await Matchs.create(req.body);
+            if(req.body && Array.isArray(req.body)){
+                await req.body.forEach(team => {
+                    Matchs.create(team);
+                });
+            }else
+                await Matchs.create(req.body);
 
-            res.status(201).send('Partida criada!');
+            res.status(201).send('Time(s) criada!');
         }catch(e){
             res.status(500).send(e);
         }

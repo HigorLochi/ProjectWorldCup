@@ -2,6 +2,7 @@ const WorldCupTeams = require('../classes/WorldcupTeams');
 const Teams = require('../classes/Teams');
 const WorldCups = require('../classes/WorldCups');
 const { BelongsTo } = require('sequelize');
+const Util = require('../util');
 
 module.exports = {
     async post(req, res) {
