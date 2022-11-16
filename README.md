@@ -10,9 +10,10 @@ API manage a World Cup.
 2. run XAMPP
 3. create a database called worldcup
 4. run the sql in ./sql/createtables.sql
-5. npm i
-6. npm run worldcupapi
-7. Start running the routes
+5. npm i nodemon
+6. npm i
+7. npm run worldcupapi
+8. Start running the routes
 
 ## Routes
 ### Common
