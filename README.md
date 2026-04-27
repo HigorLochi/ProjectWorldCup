@@ -5,6 +5,10 @@ API manage a World Cup.
 1. Postman
 2. XAMPP
 3. npm
+4. Node.js
+5. NPM ou Yarn
+6. Banco de dados (MySQL)
+   
 ## Steps
 1. import ./jsons/WorldCupAPI.postman_collection.js into Postman
 2. run XAMPP
