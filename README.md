@@ -1,5 +1,5 @@
 # ProjectWorldCup
-API manage a World Cup.
+This API aims to simulate the classification of a World Cup, allowing for the selection of matches and the calculation of the table based on the results.
 
 ## Necessary Tools
 1. Postman
